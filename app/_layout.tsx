@@ -16,11 +16,15 @@ import "../global.css";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Text, View } from "react-native";
+import { useThemeColor } from "@/hooks/useThemeColor";
+import ThemeView from "@/presentation/shared/ThemeView";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const backgroundColor = useThemeColor({}, "background");
+
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -37,13 +41,15 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView
+      style={{ backgroundColor: backgroundColor, flex: 1 }}
+    >
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <View className="bg-light-background dark:bg-dark-background">
+        <ThemeView>
           <Text className="mt-10 text-3xl text-light-text dark:text-dark-text">
             Hola Mundo
           </Text>
-        </View>
+        </ThemeView>
         {/* <Stack> */}
         {/* </Stack> */}
       </ThemeProvider>
