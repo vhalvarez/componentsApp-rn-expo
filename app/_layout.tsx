@@ -18,6 +18,7 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { Text, View } from "react-native";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import ThemeView from "@/presentation/shared/ThemeView";
+import ThemeText from "@/presentation/shared/ThemeText";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -45,10 +46,8 @@ export default function RootLayout() {
       style={{ backgroundColor: backgroundColor, flex: 1 }}
     >
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <ThemeView>
-          <Text className="mt-10 text-3xl text-light-text dark:text-dark-text">
-            Hola Mundo
-          </Text>
+        <ThemeView margin>
+          <ThemeText className="mt-20" type="h1">Hola Mundo</ThemeText>
         </ThemeView>
         {/* <Stack> */}
         {/* </Stack> */}
